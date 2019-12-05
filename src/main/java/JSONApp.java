@@ -37,18 +37,32 @@ public class JSONApp {
 
     public static JsonObject sessionResult() {
         Json jYear = new JsonNumber(2);
-        print(jYear); // 2
-
-        Json jMarks = new JsonArray(new JsonNumber(3), new JsonNumber(4));
-        print(jMarks); // [3, 4]
 
         JsonPair name = new JsonPair("name", new JsonString("Andrii"));
         JsonPair surname = new JsonPair("surname", new JsonString("Rodionov"));
-        JsonPair marks = new JsonPair("marks", jMarks);
         JsonPair year = new JsonPair("year", jYear);
 
-        JsonObject jsonObject = null;
-        // ToDo
-        return jsonObject;
+        JsonPair passed = new JsonPair("passed", new JsonBoolean(true));
+        JsonPair notPassed = new JsonPair("passed", new JsonBoolean(false));
+
+        JsonPair oop = new JsonPair("course", new JsonString("OOP"));
+        JsonPair markThree = new JsonPair("mark", new JsonNumber(3));
+        JsonObject oopCourse = new JsonObject(oop, markThree, passed);
+
+        JsonPair english = new JsonPair("course", new JsonString("English"));
+        JsonPair markFive = new JsonPair("mark", new JsonNumber(5));
+        JsonObject englishCourse = new JsonObject(english, markFive, passed);
+
+        JsonPair math = new JsonPair("course", new JsonString("Math"));
+        JsonPair markTwo = new JsonPair("mark", new JsonNumber(2));
+        JsonObject mathCourse = new JsonObject(math, markTwo, notPassed);
+
+        Json jCourses = new JsonArray(oopCourse, englishCourse, mathCourse);
+
+        JsonPair courses = new JsonPair("exams", jCourses);
+
+        JsonObject session = new JsonObject(name, surname, year, courses);
+
+        return session;
     }
 }
