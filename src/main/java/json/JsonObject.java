@@ -39,12 +39,27 @@ public class JsonObject extends Json {
     }
 
     public Json find(String name) {
-        // ToDo
-        return null;
+        if (this.jsMap.containsKey(name)) {
+            return this.jsMap.get(name).value;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean contains(String name) {
+        return this.jsMap.containsKey(name);
     }
 
     public JsonObject projection(String... names) {
+        JsonObject result = new JsonObject();
+
+        for (String name: names) {
+            if (this.jsMap.containsKey(name)) {
+                result.add(this.jsMap.get(name));
+            }
+        }
+
         // ToDo
-        return null;
+        return result;
     }
 }
